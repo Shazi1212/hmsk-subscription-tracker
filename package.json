@@ -1,0 +1,11 @@
+{
+  "name": "hmsk-subscription-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Track subscriptions, their monthly and yearly cost and the last day to cancel each one. Static, no dependencies.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/",
+    "start": "python3 -m http.server 8080 --directory public"
+  }
+}

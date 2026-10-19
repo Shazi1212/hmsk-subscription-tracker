@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subscription tracker with cancel-by dates and calendar reminders</title>
+<meta name="description" content="List your subscriptions, see the monthly and yearly total and the last day to cancel each one, and add calendar reminders. Runs in your browser, no signup.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0B0F0C">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="app.css?v=1">
+</head>
+<body>
+
+<nav class="strip" aria-label="Site">
+  <div class="wrap strip__in">
+    <a class="strip__home" id="lnkHome" href="/tools/subscription-tracker/">&larr; hmsk.life</a>
+    <span class="strip__sp"></span>
+    <a id="lnkImprint" href="/imprint/">Imprint</a>
+    <a id="lnkPrivacy" href="/privacy/">Privacy</a>
+    <span class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="de" aria-pressed="false">DE</button>
+    </span>
+  </div>
+</nav>
+
+<main class="wrap main">
+  <header class="head">
+    <p class="cmd"><span class="ps">$</span> <span data-i18n="cmd">subs --list --cancel-by</span></p>
+    <h1 data-i18n="h1">Every subscription, what it costs, and the last day to cancel</h1>
+    <p class="lead" data-i18n="lead"></p>
+  </header>
+
+  <p class="warn" id="storageWarn" hidden data-i18n="storage_off"></p>
+
+  <section class="panel summary" id="summary" aria-live="polite"></section>
+
+  <div class="grid">
+    <form class="panel form" id="subForm" autocomplete="off" novalidate>
+      <p class="panel__title"><span class="ps">&gt;</span> <span id="formTitle" data-i18n="form_add">Add a subscription</span></p>
+      <label class="field"><span class="flag">--name</span> <span class="lbl" data-i18n="f_name">Name</span>
+        <input type="text" name="name" maxlength="80" required data-ph="f_name_ph">
+        <span class="err" data-err="name" hidden></span>
+      </label>
+      <div class="row2">
+        <label class="field"><span class="flag">--price</span> <span class="lbl" data-i18n="f_price">Price</span>
+          <input type="text" name="price" inputmode="decimal" placeholder="9.99" required>
+          <span class="err" data-err="price" hidden></span>
+        </label>
+        <label class="field"><span class="flag">--currency</span> <span class="lbl" data-i18n="f_currency">Currency</span>
+          <select name="currency"><option>EUR</option><option>GBP</option><option>USD</option><option>CHF</option></select>
+        </label>
+      </div>
+      <label class="field"><span class="flag">--billed</span> <span class="lbl" data-i18n="f_cycle">Billed</span>
+        <select name="cycle" id="cycleSel"></select>
+      </label>
+      <label class="field"><span class="flag">--renews</span> <span class="lbl" data-i18n="f_next">Next renewal</span>
+        <input type="date" name="next" required>
+        <span class="hint" data-i18n="f_next_h"></span>
+        <span class="err" data-err="next" hidden></span>
+      </label>
+      <div class="field"><span class="flag">--notice</span> <span class="lbl" id="noticeLbl" data-i18n="f_notice">Notice period</span>
+        <div class="row2 row2--tight">
+          <input type="number" name="noticeN" min="0" max="3650" step="1" value="0" inputmode="numeric" aria-labelledby="noticeLbl">
+          <select name="noticeUnit" id="unitSel" aria-labelledby="noticeLbl"></select>
+        </div>
+        <span class="hint" data-i18n="f_notice_h"></span>
+        <span class="err" data-err="notice" hidden></span>
+      </div>
+      <label class="field"><span class="flag">--category</span> <span class="lbl" data-i18n="f_category">Category</span>
+        <select name="category" id="catSel"></select>
+      </label>
+      <label class="field"><span class="flag">--note</span> <span class="lbl" data-i18n="f_note">Note</span>
+        <input type="text" name="note" maxlength="300" data-ph="f_note_ph">
+      </label>
+      <label class="check"><input type="checkbox" name="paused"> <span data-i18n="f_paused">Paused</span></label>
+      <div class="form__btns">
+        <button type="submit" class="btn btn--main" id="saveBtn" data-i18n="save_add">Add subscription</button>
+        <button type="button" class="btn btn--line" id="cancelEditBtn" hidden data-i18n="cancel_edit">Cancel</button>
+      </div>
+      <p class="small" id="formMsg" role="status"></p>
+    </form>
+
+    <section class="panel list" aria-labelledby="listTitle">
+      <p class="panel__title" id="listTitle"><span class="ps">$</span> ls ~/<span data-i18n="list_title">subscriptions</span></p>
+      <div id="listBody"></div>
+    </section>
+  </div>
+
+  <section class="panel rem" id="remBox">
+    <p class="panel__title"><span class="ps">$</span> cat <span data-i18n="rem_title">reminders</span>.txt</p>
+    <p class="small" data-i18n="rem_ics"></p>
+    <p><a class="btn btn--line" id="mailLink" href="/?topic=subscription-tracker#contact"><span data-i18n="rem_mail">Email me</span> &rarr;</a></p>
+    <p class="small" data-i18n="rem_mail_d"></p>
+  </section>
+
+  <section class="panel data">
+    <p class="panel__title"><span class="ps">$</span> ls ~/<span data-i18n="data_title">your data</span></p>
+    <div class="data__btns">
+      <button type="button" class="linkish" id="exportBtn" data-i18n="d_export">Export JSON</button>
+      <label class="linkish" id="importLbl"><span data-i18n="d_import">Import JSON</span><input type="file" id="importFile" accept="application/json,.json" hidden></label>
+      <button type="button" class="linkish" id="icsAllBtn" data-i18n="d_ics_all">All reminders (.ics)</button>
+      <button type="button" class="linkish linkish--danger" id="clearBtn" data-i18n="d_clear">Delete all</button>
+    </div>
+    <p class="small" data-i18n="d_hint"></p>
+    <p class="small" id="dataMsg" role="status"></p>
+  </section>
+
+  <section class="sources">
+    <p class="cmd"><span class="ps">$</span> <span data-i18n="sources_cmd">cat good-to-know.txt</span></p>
+    <ul id="tipsList"></ul>
+    <ul id="sourcesList" class="srcs"></ul>
+    <p class="note" data-i18n="note"></p>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p data-i18n="privacy_line">Runs in your browser.</p>
+</footer>
+
+<script src="config.js?v=1"></script>
+<script src="logic.js?v=1"></script>
+<script src="i18n.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>
