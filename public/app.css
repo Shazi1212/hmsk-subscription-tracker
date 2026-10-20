@@ -158,3 +158,12 @@ input:hover, select:hover { border-color: var(--secondary); }
   .strip, .form, .rem, .data, .sub__acts, .foot, #listBody .btn { display: none !important; }
   .grid { display: block; } .panel { border: 0; padding: 0; }
 }
+
+/* email reminders form (posts to hmsk.life/email/subscribe.php, double opt-in) */
+.remform { margin-top: var(--md); max-width: 720px; }
+.rempick { border-top: 1px solid var(--border); padding-top: var(--xs); margin-bottom: var(--xs); }
+.rempick .check { margin-bottom: 0; min-height: 36px; }
+.check--top { align-items: flex-start; }
+.check--top input { margin-top: 2px; flex: none; }
+.check a { color: var(--primary); }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }

@@ -22,7 +22,7 @@ It is a static page with no build step and no dependencies.
 python3 -m http.server 8080 --directory public   # then open http://localhost:8080
 ```
 
-Or copy the `public/` folder to any web server. Site links (tool page, imprint, Kündigung generator, contact form) point
+Or copy the `public/` folder to any web server. Site links (tool page, imprint, Kündigung generator, email signup) point
 to `https://hmsk.life`; change `siteBase` in `public/config.js` for your own copy.
 
 ## Tests
@@ -41,8 +41,10 @@ folding without splitting UTF-8 characters, escaping, two alarms).
 
 ## Email reminders
 
-The hosted page offers "email me before my cancel-by dates" as a signup. Sending those emails needs a server (a
-scheduler and a mail provider) and is not part of this repo yet; everything here runs in the browser.
+"Email me before my cancel-by dates" opens a small form: you tick the dates to be reminded of, and only those dates
+(with the subscription name) are posted to `hmsk.life/email/subscribe.php` (double opt-in; each date is deleted once
+its reminder is sent). The list itself stays in the browser. That server side (signup, scheduler, mail) is part of the
+hmsk.life site, not this repo; on a self-hosted copy the form still posts to hmsk.life unless you change `siteBase`.
 
 Not legal advice: the cancel-by date comes from the dates you enter; your contract terms decide.
 

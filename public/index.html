@@ -90,8 +90,24 @@
   <section class="panel rem" id="remBox">
     <p class="panel__title"><span class="ps">$</span> cat <span data-i18n="rem_title">reminders</span>.txt</p>
     <p class="small" data-i18n="rem_ics"></p>
-    <p><a class="btn btn--line" id="mailLink" href="/?topic=subscription-tracker#contact"><span data-i18n="rem_mail">Email me</span> &rarr;</a></p>
+    <p><button type="button" class="btn btn--line" id="remOpen" aria-expanded="false" aria-controls="remForm"><span data-i18n="rem_mail">Email me</span> &rarr;</button></p>
     <p class="small" data-i18n="rem_mail_d"></p>
+    <form id="remForm" class="remform" method="POST" action="/email/subscribe.php" hidden>
+      <input type="hidden" name="lang" value="en">
+      <input type="hidden" name="topic" value="subscription-reminders">
+      <input type="hidden" name="source" value="/apps/subscription-tracker/">
+      <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="small" data-i18n="rem_pick"></p>
+      <div id="remPick"></div>
+      <label class="field"><span class="flag">--email</span> <input type="email" name="email" required autocomplete="email"></label>
+      <label class="field"><span class="flag">--lead</span> <span class="lbl" data-i18n="rem_lead"></span>
+        <select name="lead"><option>1</option><option>3</option><option selected>7</option><option>14</option><option>30</option></select>
+      </label>
+      <label class="check check--top"><input type="checkbox" name="consent" value="1" required> <span id="remConsent"></span></label>
+      <p class="small" data-i18n="rem_doi"></p>
+      <button type="submit" class="btn btn--main" data-i18n="rem_submit">Send confirmation email</button>
+      <p class="small" id="remMsg" role="status"></p>
+    </form>
   </section>
 
   <section class="panel data">
