@@ -147,11 +147,11 @@
   }
 
   function chip(sch, sub) {
-    if (sub.paused) return '<span class="chip">[' + esc(t('chip_paused')) + ']</span>';
-    if (sch.status === 'missed') return '<span class="chip chip--missed">[' + esc(t('chip_missed')) + ']</span>';
+    if (sub.paused) return '<span class="chip">' + esc(t('chip_paused')) + '</span>';
+    if (sch.status === 'missed') return '<span class="chip chip--missed">' + esc(t('chip_missed')) + '</span>';
     var n = sch.days;
     var label = n === 0 ? t('chip_today') : n === 1 ? t('chip_1day') : t('chip_days', { n: n });
-    return '<span class="chip chip--' + sch.status + '">[' + esc(label) + ']</span>';
+    return '<span class="chip chip--' + sch.status + '">' + esc(label) + '</span>';
   }
 
   // ---------- list ----------

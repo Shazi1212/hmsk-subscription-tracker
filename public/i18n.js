@@ -3,7 +3,7 @@ window.SUB_I18N = {
   en: {
     locale: 'en-GB',
     title: 'Subscription tracker with cancel-by dates and calendar reminders',
-    cmd: 'subs --list --cancel-by',
+    cmd: 'Subscription Tracker',
     h1: 'Every subscription, what it costs, and the last day to cancel',
     lead: 'List your subscriptions and contracts once. See what they cost per month and per year, the last day you can cancel each one, and put a reminder in your calendar. Stored only in this browser.',
     home_href: '/tools/subscription-tracker/', imprint: 'Imprint', imprint_href: '/imprint/', privacy: 'Privacy', privacy_href: '/privacy/',
@@ -29,7 +29,7 @@ window.SUB_I18N = {
     cat_streaming: 'Streaming', cat_music: 'Music', cat_software: 'Software & apps', cat_cloud: 'Cloud & storage', cat_mobile: 'Mobile phone',
     cat_internet: 'Internet & TV', cat_gym: 'Gym & sport', cat_insurance: 'Insurance', cat_news: 'News & magazines', cat_gaming: 'Gaming', cat_other: 'Other',
 
-    list_title: 'subscriptions, soonest deadline first',
+    list_title: 'Subscriptions, soonest deadline first',
     empty: 'Nothing here yet. Add your first subscription on the left, or load a few examples to see how it works.',
     examples: 'Load examples', ex_names: ['Video streaming', 'Gym membership', 'Phone contract', 'Cloud storage'],
     renews: 'renews {d}', cancel_by: 'cancel by {d}', missed: 'missed: renews {d}', next_chance: 'next chance: cancel by {d}', no_notice: 'no notice period',
@@ -37,19 +37,19 @@ window.SUB_I18N = {
     chip_missed: 'missed', chip_today: 'today', chip_days: '{n} days', chip_1day: '1 day', chip_paused: 'paused',
     a_ics: '.ics reminder', a_cancel: 'Cancel it', a_edit: 'edit', a_delete: 'delete', confirm_delete: 'Delete "{name}"?',
 
-    data_title: 'your data', d_export: 'Export JSON', d_import: 'Import JSON', d_ics_all: 'All reminders (.ics)', d_clear: 'Delete all',
+    data_title: 'Your data', d_export: 'Export JSON', d_import: 'Import JSON', d_ics_all: 'All reminders (.ics)', d_clear: 'Delete all',
     d_hint: 'Saved only in this browser (localStorage). Export a backup to move it to another device or browser.',
     confirm_import: 'Replace your {n} subscriptions with the {m} from this file?', imported: 'Imported {n} subscriptions.', import_skipped: ' {n} invalid entries skipped.',
     import_bad: 'That file is not a backup from this tool.', confirm_clear: 'Delete all {n} subscriptions from this browser?', cleared: 'All deleted.',
     storage_off: 'Your browser blocks local storage, so the list is lost when you close this tab. Export a backup before you leave.',
 
-    rem_title: 'reminders',
+    rem_title: 'Reminders',
     rem_ics: 'Calendar: each .ics file adds the cancel-by date as an all-day event with an alert 7 days before and on the day. Works with Google, Apple and Outlook calendars. After a renewal, download it again for the next period.',
     rem_mail: 'Email me before my cancel-by dates',
     rem_mail_d: 'Your list stays in your browser. Only the dates you tick below (with the subscription name) go to my server, and each is deleted once the reminder is sent.',
     rem_pick: 'Which dates should I remind you of?',
     rem_cancel: 'cancel by {d}', rem_renew: 'renews {d}', rem_none: 'Add a subscription first.',
-    rem_lead: 'Days before the date', rem_submit: 'Send confirmation email',
+    rem_email: 'Email', rem_lead: 'Days before the date', rem_submit: 'Send confirmation email',
     rem_doi: 'Double opt-in: nothing is stored for good and nothing is sent until you click the link in the confirmation email.',
     rem_tick: 'Tick at least one date.',
     rem_consent: "I agree that Hafiz Khalid (hmsk.life) stores my email address and the dates I ticked, and emails me a reminder before each date. I confirm with the link in the first email. I can unsubscribe and delete the dates at any time with the link in every email. Privacy policy: hmsk.life/privacy/#newsletter",
@@ -58,7 +58,7 @@ window.SUB_I18N = {
     ics_desc: 'Last day for your cancellation of {name} to arrive: {d}. Otherwise it renews on {r} ({price}). Send it a few days earlier if you post it.\n\nWrite the cancellation letter: {k}\nYour list: {url}',
     ics_file: 'cancel-{slug}-{d}.ics', ics_all_file: 'subscription-reminders.ics', ics_none: 'No upcoming cancel-by dates.',
 
-    sources_cmd: 'cat good-to-know.txt',
+    sources_cmd: 'Good to know',
     tips: [
       'Germany: consumer contracts signed since 1 March 2022 can, after the minimum term, usually be cancelled at any time with at most one month notice (§ 309 Nr. 9 BGB). Use 1 month for those.',
       'Germany: contracts you can sign online must offer a cancellation button ("Verträge hier kündigen", § 312k BGB). Save the confirmation you get.',
@@ -76,7 +76,7 @@ window.SUB_I18N = {
   de: {
     locale: 'de-DE',
     title: 'Abo-Tracker mit Kündigungsfristen und Kalender-Erinnerung',
-    cmd: 'abos --liste --kuendigen-bis',
+    cmd: 'Subscription Tracker',
     h1: 'Alle Abos, was sie kosten, und bis wann Sie kündigen müssen',
     lead: 'Tragen Sie Ihre Abos und Verträge einmal ein. Sie sehen die Kosten pro Monat und pro Jahr, den letzten Tag für die Kündigung und können eine Erinnerung in Ihren Kalender legen. Gespeichert nur in diesem Browser.',
     home_href: '/de/tools/subscription-tracker/', imprint: 'Impressum', imprint_href: '/impressum/', privacy: 'Datenschutz', privacy_href: '/datenschutz/',
@@ -102,7 +102,7 @@ window.SUB_I18N = {
     cat_streaming: 'Streaming', cat_music: 'Musik', cat_software: 'Software & Apps', cat_cloud: 'Cloud & Speicher', cat_mobile: 'Handy',
     cat_internet: 'Internet & TV', cat_gym: 'Fitness & Sport', cat_insurance: 'Versicherung', cat_news: 'Zeitung & Magazine', cat_gaming: 'Gaming', cat_other: 'Sonstiges',
 
-    list_title: 'abos, nächste frist zuerst',
+    list_title: 'Abos, nächste Frist zuerst',
     empty: 'Noch nichts eingetragen. Fügen Sie links Ihr erstes Abo hinzu oder laden Sie ein paar Beispiele, um zu sehen, wie es funktioniert.',
     examples: 'Beispiele laden', ex_names: ['Video-Streaming', 'Fitnessstudio', 'Handyvertrag', 'Cloud-Speicher'],
     renews: 'verlängert sich am {d}', cancel_by: 'kündigen bis {d}', missed: 'verpasst: verlängert sich am {d}', next_chance: 'nächste Chance: kündigen bis {d}', no_notice: 'keine Kündigungsfrist',
@@ -110,19 +110,19 @@ window.SUB_I18N = {
     chip_missed: 'verpasst', chip_today: 'heute', chip_days: '{n} Tage', chip_1day: '1 Tag', chip_paused: 'pausiert',
     a_ics: '.ics-Erinnerung', a_cancel: 'Kündigen', a_edit: 'bearbeiten', a_delete: 'löschen', confirm_delete: '„{name}“ löschen?',
 
-    data_title: 'ihre daten', d_export: 'JSON exportieren', d_import: 'JSON importieren', d_ics_all: 'Alle Erinnerungen (.ics)', d_clear: 'Alles löschen',
+    data_title: 'Ihre Daten', d_export: 'JSON exportieren', d_import: 'JSON importieren', d_ics_all: 'Alle Erinnerungen (.ics)', d_clear: 'Alles löschen',
     d_hint: 'Nur in diesem Browser gespeichert (localStorage). Exportieren Sie eine Sicherung, um die Liste auf ein anderes Gerät oder in einen anderen Browser zu übertragen.',
     confirm_import: 'Ihre {n} Abos durch die {m} aus dieser Datei ersetzen?', imported: '{n} Abos importiert.', import_skipped: ' {n} ungültige Einträge übersprungen.',
     import_bad: 'Diese Datei ist keine Sicherung aus diesem Tool.', confirm_clear: 'Alle {n} Abos aus diesem Browser löschen?', cleared: 'Alles gelöscht.',
     storage_off: 'Ihr Browser blockiert den lokalen Speicher, die Liste geht beim Schließen des Tabs verloren. Exportieren Sie vorher eine Sicherung.',
 
-    rem_title: 'erinnerungen',
+    rem_title: 'Erinnerungen',
     rem_ics: 'Kalender: Jede .ics-Datei trägt den Kündigungstermin als ganztägigen Termin ein, mit Hinweis 7 Tage vorher und am Tag selbst. Für Google, Apple und Outlook. Nach einer Verlängerung für den nächsten Zeitraum neu herunterladen.',
     rem_mail: 'Per E-Mail vor meinen Kündigungsfristen erinnern',
     rem_mail_d: 'Ihre Liste bleibt in Ihrem Browser. Nur die Termine, die Sie unten anhaken (mit dem Namen des Abos), gehen an meinen Server, und jeder wird gelöscht, sobald die Erinnerung verschickt ist.',
     rem_pick: 'An welche Termine soll ich Sie erinnern?',
     rem_cancel: 'kündigen bis {d}', rem_renew: 'verlängert sich am {d}', rem_none: 'Legen Sie zuerst ein Abo an.',
-    rem_lead: 'Tage vor dem Termin', rem_submit: 'Bestätigungs-E-Mail senden',
+    rem_email: 'E-Mail', rem_lead: 'Tage vor dem Termin', rem_submit: 'Bestätigungs-E-Mail senden',
     rem_doi: 'Double-Opt-in: Erst wenn Sie den Link in der Bestätigungs-E-Mail klicken, wird etwas dauerhaft gespeichert oder verschickt.',
     rem_tick: 'Bitte mindestens einen Termin anhaken.',
     rem_consent: "Ich bin einverstanden, dass Hafiz Khalid (hmsk.life) meine E-Mail-Adresse und die angehakten Termine speichert und mich vor jedem Termin per E-Mail erinnert. Ich bestätige mit dem Link in der ersten E-Mail. Abmelden und die Termine löschen kann ich jederzeit über den Link in jeder E-Mail. Datenschutz: hmsk.life/datenschutz/#newsletter",
@@ -131,7 +131,7 @@ window.SUB_I18N = {
     ics_desc: 'Letzter Tag, an dem Ihre Kündigung für {name} ankommen muss: {d}. Sonst verlängert es sich am {r} ({price}). Per Post ein paar Tage früher abschicken.\n\nKündigung schreiben: {k}\nIhre Liste: {url}',
     ics_file: 'kuendigen-{slug}-{d}.ics', ics_all_file: 'abo-erinnerungen.ics', ics_none: 'Keine anstehenden Kündigungsfristen.',
 
-    sources_cmd: 'cat gut-zu-wissen.txt',
+    sources_cmd: 'Gut zu wissen',
     tips: [
       'Verbraucherverträge, die seit dem 1. März 2022 geschlossen wurden, sind nach der Mindestlaufzeit meist jederzeit mit höchstens einem Monat Frist kündbar (§ 309 Nr. 9 BGB). Tragen Sie dafür 1 Monat ein.',
       'Wer Verträge online abschließen lässt, muss einen Kündigungsbutton anbieten („Verträge hier kündigen“, § 312k BGB). Speichern Sie die Bestätigung.',
