@@ -41,9 +41,10 @@ folding without splitting UTF-8 characters, escaping, two alarms).
 
 ## Email reminders
 
-"Email me before my cancel-by dates" opens a small form: you tick the dates to be reminded of, and only those dates
-(with the subscription name) are posted to `hmsk.life/email/subscribe.php` (double opt-in; each date is deleted once
-its reminder is sent). The list itself stays in the browser. That server side (signup, scheduler, mail) is part of the
+From the second visit with a list, "Email me before my cancel-by dates" opens a small form (`public/email-moment.js`,
+shared by the hmsk.life tools): you tick the dates to be reminded of and type a label for each, and only those dates
+and labels are posted to `hmsk.life/email/subscribe.php`. The form lists exactly what will be sent before you submit
+(double opt-in; each date is deleted once its reminder is sent). The list itself stays in the browser. That server side (signup, scheduler, mail) is part of the
 hmsk.life site, not this repo; on a self-hosted copy the form still posts to hmsk.life unless you change `siteBase`.
 
 Not legal advice: the cancel-by date comes from the dates you enter; your contract terms decide.

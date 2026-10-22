@@ -96,11 +96,6 @@
     $('#lnkHome').href = link(t('home_href'));
     $('#lnkImprint').href = link(t('imprint_href')); $('#lnkImprint').textContent = t('imprint');
     $('#lnkPrivacy').href = link(t('privacy_href')); $('#lnkPrivacy').textContent = t('privacy');
-    $('#remForm').action = link('/email/subscribe.php');
-    $('#remForm').elements.lang.value = lang;
-    $('#remConsent').innerHTML = esc(t('rem_consent')).replace(/hmsk\.life\/(privacy|datenschutz)\/#newsletter/, function (m) {
-      return '<a href="' + esc(link('/' + m.split('/').slice(1).join('/'))) + '">' + m + '</a>';
-    });
     options($('#cycleSel'), Object.keys(L.CYCLES), 'cycle_');
     options($('#unitSel'), L.UNITS, 'unit_');
     options($('#catSel'), L.CATEGORIES, 'cat_');
@@ -193,33 +188,29 @@
     renderRemPick(rows);
   }
 
-  // ---------- email reminders (double opt-in on hmsk.life; only ticked dates are sent) ----------
+  // ---------- email reminders (double opt-in on hmsk.life, email-moment.js) ----------
+  // Offered from the second session with a list. Only the dates the person ticks are sent, each with a label they type
+  // (the subscription name is just the placeholder); the form lists exactly that before sending.
   function renderRemPick(rows) {
-    var el = $('#remPick');
     var live = rows.filter(function (r) { return !r.sub.paused; });
-    if (!live.length) { el.innerHTML = '<p class="dim">' + esc(t('rem_none')) + '</p>'; return; }
-    el.innerHTML = live.slice(0, 10).map(function (r) {
+    var uses = live.length && window.HMSKMoment ? HMSKMoment.use('subscription-tracker') : (window.HMSKMoment ? HMSKMoment.uses('subscription-tracker') : 0);
+    $('#remMail').hidden = uses < 2;
+    if (uses < 2) return;
+    var items = [];
+    live.slice(0, 10).forEach(function (r) {
       var d = L.activeDeadline(r.sch);
       var renew = r.sch.status === 'missed' && r.sch.nextChance ? r.sch.nextChance.renewal : r.sch.renewal;
-      var opt = function (kind, date, lbl) {
-        return '<label class="check"><input type="checkbox" data-rem data-kind="' + kind + '" data-date="' + esc(date) + '" data-label="' + esc(r.sub.name) + '"> ' + esc(lbl) + '</label>';
-      };
-      return '<div class="rempick"><span class="sub__name">' + esc(r.sub.name) + '</span>' +
-        opt('cancel', d.cancelBy, t('rem_cancel', { d: fmtDate(d.cancelBy, true) })) +
-        opt('renewal', renew, t('rem_renew', { d: fmtDate(renew, true) })) + '</div>';
-    }).join('');
-  }
-  function onRemSubmit(e) {
-    var f = $('#remForm');
-    $$('input[data-gen]', f).forEach(function (i) { i.remove(); });
-    var picked = $$('input[data-rem]:checked', f).filter(function (c) { return c.getAttribute('data-date') >= today; });
-    if (!picked.length) { e.preventDefault(); flash('#remMsg', t('rem_tick')); return; }
-    picked.forEach(function (c, i) {
-      [['on', '1'], ['kind', c.getAttribute('data-kind')], ['date', c.getAttribute('data-date')], ['label', c.getAttribute('data-label')]].forEach(function (kv) {
-        var h = document.createElement('input');
-        h.type = 'hidden'; h.name = 'rem[' + i + '][' + kv[0] + ']'; h.value = kv[1]; h.setAttribute('data-gen', '');
-        f.appendChild(h);
+      [['cancel', d.cancelBy, 'rem_cancel'], ['renewal', renew, 'rem_renew']].forEach(function (x) {
+        if (x[1] < today) return;
+        items.push({ key: r.sub.id + x[0], kind: x[0], date: x[1], label: '', hint: r.sub.name,
+          text: r.sub.name + ': ' + t(x[2], { d: fmtDate(x[1], true) }) });
       });
+    });
+    if (!items.length) { $('#remForm').innerHTML = '<p class="dim">' + esc(t('rem_none')) + '</p>'; return; }
+    HMSKMoment.render($('#remForm'), {
+      lang: lang, action: link('/email/subscribe.php'), privacy: link(t('privacy_href')) + '#newsletter',
+      source: '/apps/subscription-tracker/', topic: 'subscription-reminders', topicName: t('rem_topic'), consent: 'reminders',
+      title: t('rem_pick'), intro: t('rem_label_d'), items: items, pick: true, leads: [1, 3, 7, 14, 30],
     });
   }
 
@@ -337,7 +328,6 @@
 
   // ---------- wiring ----------
   $('#subForm').addEventListener('submit', onSubmit);
-  $('#remForm').addEventListener('submit', onRemSubmit);
   $('#remOpen').addEventListener('click', function () {
     var f = $('#remForm'); f.hidden = !f.hidden;
     this.setAttribute('aria-expanded', String(!f.hidden));
